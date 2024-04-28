@@ -178,7 +178,9 @@
 					if (copyTransform) {
 						UnityEditorInternal.ComponentUtility.PasteComponentValues (targetComponent);
 					}
-				} else {
+                } else if (component is Renderer) {
+					continue;
+                } else {
 					UnityEditorInternal.ComponentUtility.PasteComponentAsNew (go);
 				}
 
@@ -253,6 +255,9 @@
 			foreach (Component component in go.GetComponents<Component> ()) {
 				if (component != null && componentsTypes.Contains (component.GetType ())) {
 					if (component is UnityEngine.Transform) {
+						continue;
+					}
+					else if(component is Renderer) {
 						continue;
 					}
 					Object.DestroyImmediate (component);
